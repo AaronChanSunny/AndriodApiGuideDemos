@@ -1,2 +1,2 @@
-# AndriodApiGuideDemos
+# AndroidApiGuideDemos
 Android Api Guide Demos
