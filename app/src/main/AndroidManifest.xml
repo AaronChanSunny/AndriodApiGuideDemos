@@ -11,12 +11,49 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".DeviceCompatibilityActivity"
+            android:label="@string/title_activity_device_compatibility"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="me.aaronchan.androidapiguidedemos.MainActivity"/>
+        </activity>
+        <activity
+            android:name=".IntentsAndIntentFilterActivity"
+            android:label="@string/title_activity_intents_and_intent_filter"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="me.aaronchan.androidapiguidedemos.MainActivity"/>
+        </activity>
+        <activity
+            android:name=".model.ActivityDemoActivity"
+            android:label="@string/title_activity_activity_demo"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="me.aaronchan.androidapiguidedemos.MainActivity"/>
+        </activity>
+        <activity
+            android:name=".FragmentPlayActivity"
+            android:label="@string/title_activity_fragment_play"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="me.aaronchan.androidapiguidedemos.MainActivity"/>
         </activity>
     </application>
 

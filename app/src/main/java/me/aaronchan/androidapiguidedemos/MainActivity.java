@@ -1,15 +1,21 @@
 package me.aaronchan.androidapiguidedemos;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import me.aaronchan.androidapiguidedemos.model.ActivityDemoActivity;
+import me.aaronchan.androidapiguidedemos.model.Item;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ListAdapter mAdapter;
+    private RecyclerView mList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,35 +24,30 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        initData();
+        initView();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    private void initView() {
+        mList = (RecyclerView) findViewById(R.id.list);
+        mList.setLayoutManager(new LinearLayoutManager(this));
+        mList.setAdapter(mAdapter);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    private void initData() {
+        mAdapter = new ListAdapter(getListItems());
+    }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+    private List<Item> getListItems() {
+        List<Item> items = new ArrayList<>();
 
-        return super.onOptionsItemSelected(item);
+        items.add(new Item(true, "Introduction"));
+        items.add(new Item(false, "Device Compatibility", "Device features", DeviceCompatibilityActivity.class));
+        items.add(new Item(true, "App Components"));
+        items.add(new Item(false, "Intents And Intent Filters", "Implicit intents demo.", IntentsAndIntentFilterActivity.class));
+        items.add(new Item(false, "Activities", "Activity demo.", ActivityDemoActivity.class));
+        items.add(new Item(false, "Activities", "Fragment.", FragmentPlayActivity.class));
+
+        return items;
     }
 }
