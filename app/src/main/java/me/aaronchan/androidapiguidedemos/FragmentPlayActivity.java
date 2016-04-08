@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 
 public class FragmentPlayActivity extends AppCompatActivity {
@@ -42,6 +43,12 @@ public class FragmentPlayActivity extends AppCompatActivity {
                 Log.d(TAG, "onBackStackChanged");
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_fragment_play, menu);
+        return true;
     }
 
     private void removeFragment() {
