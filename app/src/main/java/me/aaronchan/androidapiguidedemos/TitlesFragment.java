@@ -1,18 +1,21 @@
 package me.aaronchan.androidapiguidedemos;
 
-import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TitlesFragment extends ListFragment {
 
-    private OnFragmentInteractionListener mListener;
     private ArrayAdapter<String> mAdapter;
+    private boolean mIsPannels;
 
     public TitlesFragment() {
     }
@@ -22,28 +25,42 @@ public class TitlesFragment extends ListFragment {
         return fragment;
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         initData();
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        setListAdapter(mAdapter);
+        mIsPannels = getActivity().findViewById(R.id.container_detail) != null;
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+        String title = mAdapter.getItem(position);
+        showDetail(title);
+    }
+
+    private void showDetail(String title) {
+        if (mIsPannels) {
+            Toast.makeText(getActivity(), title + " selected.", Toast.LENGTH_SHORT).show();
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.container_detail, DetailFragment.newInstance(title))
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .commit();
+        } else {
+            Toast.makeText(getActivity(), "start a new activity.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), DetailActivity.class);
+            intent.putExtra(DetailFragment.ARG_TITLE, title);
+            startActivity(intent);
+        }
     }
 
     private void initData() {
@@ -61,20 +78,4 @@ public class TitlesFragment extends ListFragment {
         return titles;
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        setListAdapter(mAdapter);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-    }
 }

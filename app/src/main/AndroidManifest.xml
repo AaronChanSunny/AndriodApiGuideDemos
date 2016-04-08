@@ -58,11 +58,21 @@
         <activity
             android:name=".FragmentDemoActivity"
             android:label="@string/title_activity_fragment_demo"
+            android:launchMode="singleTop"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="me.aaronchan.androidapiguidedemos.MainActivity"/>
+        </activity>
+        <activity
+            android:name=".DetailActivity"
+            android:label="@string/title_activity_detail"
+            android:parentActivityName=".FragmentDemoActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="me.aaronchan.androidapiguidedemos.FragmentDemoActivity"/>
         </activity>
     </application>
 
