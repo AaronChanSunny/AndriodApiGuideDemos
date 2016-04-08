@@ -55,6 +55,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="me.aaronchan.androidapiguidedemos.MainActivity"/>
         </activity>
+        <activity
+            android:name=".FragmentDemoActivity"
+            android:label="@string/title_activity_fragment_demo"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="me.aaronchan.androidapiguidedemos.MainActivity"/>
+        </activity>
     </application>
 
 </manifest>

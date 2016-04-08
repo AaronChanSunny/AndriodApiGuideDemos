@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         items.add(new Item(false, "Intents And Intent Filters", "Implicit intents demo.", IntentsAndIntentFilterActivity.class));
         items.add(new Item(false, "Activities", "Activity demo.", ActivityDemoActivity.class));
         items.add(new Item(false, "Activities", "Fragment.", FragmentPlayActivity.class));
+        items.add(new Item(false, "Activities", "Fragment demo.", FragmentDemoActivity.class));
 
         return items;
     }
